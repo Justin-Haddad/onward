@@ -17,7 +17,7 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @GetMapping
+    @GetMapping("/getinvoices")
     public List<Invoice> getAllInvoices() {
         return invoiceService.getAllInvoices();
     }
@@ -25,12 +25,13 @@ public class InvoiceController {
     // Other controller methods for handling HTTP requests
 
     //edit invoice names 
-    @PutMapping("/invoices")
+    //TODO by Id?
+    @PutMapping("/editinvoice")
     public Invoice editInvoice(@RequestBody Invoice invoice) {
         return InvoiceService.updateInvoice(invoice);
     }
     //Delete Invoices by id
-    @DeleteMapping("/invoices")
+    @DeleteMapping("/deleteinvoice{id}")
     public void deleteInovice(@PathVariable Long id){
         invoiceService.deleteInoviceByID(id);
     }

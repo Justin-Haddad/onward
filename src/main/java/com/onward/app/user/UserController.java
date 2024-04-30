@@ -16,6 +16,7 @@ import com.onward.app.security.JwtService;
 @RestController
 @CrossOrigin
 @RequestMapping("/auth")
+//TODO once this runs on server must be authenticated to create users
 public class UserController {
 
     @Autowired
@@ -45,7 +46,7 @@ public class UserController {
     }
     */
 
-    @PostMapping("/login") 
+    @PostMapping(path = "/login", consumes = "application/json") 
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) { 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())); 
         if (authentication.isAuthenticated()) { 

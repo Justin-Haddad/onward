@@ -40,24 +40,13 @@ public class SecurityConfig {
     }
     
     // Configuring HttpSecurity 
+    //TODO reconfigure to block login once temp db no longer used
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { 
         return http.csrf(csrf -> csrf.disable())
                     .cors(cors -> cors.disable())
                     .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/auth/**").permitAll())
-                    .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/measurement/**")
-                    .hasAnyRole("MEASUREMENT", "ADMIN"))
-                    .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/electrical/**")
-                    .hasAnyRole("ELECTRICAL", "ADMIN"))
-                    .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/roustabout/**")
-                    .hasAnyRole("ROUSTABOUT", "ADMIN"))
-                    .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/automation/**")
-                    .hasAnyRole("AUTOMATION", "ADMIN"))
                     .authorizeHttpRequests(auth -> auth
                     .anyRequest().authenticated()
                     )
